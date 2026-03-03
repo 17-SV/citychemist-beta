@@ -1030,6 +1030,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     carouselContainer.style.transform = `translateX(calc(-${currentIndex * 100}vw + ${moveX}px))`;
   });
+
   carouselContainer.addEventListener('touchend', e => {
     isDragging = false;
     const endX = e.changedTouches[0].clientX;
@@ -1052,4 +1053,5 @@ document.addEventListener("DOMContentLoaded", function () {
       renderSlides();
     });
   });
+
 });
