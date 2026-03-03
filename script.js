@@ -115,11 +115,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentHour = now.getHours();
     const currentMinutes = now.getMinutes();
     const currentDay = now.getDay();
-    const currentDateString = now.toISOString().slice(5, 10);
+
+    // Helper to get MM-DD string using local date (not UTC via toISOString)
+    function getMMDD(date) {
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
+      return `${mm}-${dd}`;
+    }
+
+    const currentDateString = getMMDD(now);
 
     const tomorrow = new Date(now);
     tomorrow.setDate(now.getDate() + 1);
-    const tomorrowDateString = tomorrow.toISOString().slice(5, 10);
+    const tomorrowDateString = getMMDD(tomorrow);
 
     let todayHours;
     if (currentDateString === diwaliDate) {
@@ -151,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 1; i <= 7; i++) {
       const checkDate = new Date(now);
       checkDate.setDate(now.getDate() + i);
-      const checkDateStr = checkDate.toISOString().slice(5, 10);
+      const checkDateStr = getMMDD(checkDate);
       if (!holidays.includes(checkDateStr)) {
         nextOpenDate = checkDate;
         daysAhead = i;
@@ -649,7 +657,7 @@ document.addEventListener("DOMContentLoaded", function () {
         festiveNote = '';
       } else {
         statusMessage = 'Closed now';
-        if (currentHour < todayHours.open) {
+        if (currentHour < todayHours.open && !isHolidayToday) {
           timeInfoMessage = `Opens at ${formatTime(todayHours.open)}.`;
         } else {
           timeInfoMessage = getNextOpenText();
@@ -1022,7 +1030,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     carouselContainer.style.transform = `translateX(calc(-${currentIndex * 100}vw + ${moveX}px))`;
   });
-
   carouselContainer.addEventListener('touchend', e => {
     isDragging = false;
     const endX = e.changedTouches[0].clientX;
@@ -1045,5 +1052,4 @@ document.addEventListener("DOMContentLoaded", function () {
       renderSlides();
     });
   });
-
 });
