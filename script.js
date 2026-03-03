@@ -1,5 +1,5 @@
 console.log("Script loaded");
-
+//Github
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM fully loaded");
 
@@ -1055,3 +1055,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
