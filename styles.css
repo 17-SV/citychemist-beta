@@ -3414,3 +3414,39 @@ body {
     padding: 20px;
   }
 }
+
+/* ────────────────────────────────────────────────
+   Force ONLY non-Pro solid icons back to free normal thickness
+───────────────────────────────────────────────── */
+
+/* 1. Default: all solid icons use free font/weight (your current rule) */
+.fa-solid,
+.fas,
+[class*="fa-solid"],
+[class*="fas"] {
+  font-family: "Font Awesome 6 Free", "Font Awesome 7 Free", sans-serif !important;
+  font-weight: 900 !important;
+}
+
+/* 2. EXCEPTION: Let these specific Pro solid icons use the Pro font file */
+.fa-solid.fa-box-circle-check,
+.fa-solid.fa-badge-percent,
+.fa-solid.fa-location-check,
+.fa-badge-check,
+.fa-solid.fa-sparkles {
+  font-family: "Font Awesome 7 Pro", "Font Awesome 6 Pro", sans-serif !important;
+  font-weight: 900 !important;
+  /* keep solid weight */
+}
+
+/* 3. Sharp-duotone icons — must use their own family (already set in sharp-duotone-solid.css) */
+.fa-sharp-duotone {
+  font-family: "Font Awesome 7 Sharp Duotone", var(--fa-family-duotone) !important;
+}
+
+/* 4. Brands stay protected (if any look wrong) */
+.fa-brands,
+.fab {
+  font-family: "Font Awesome 6 Brands", "Font Awesome 7 Brands", sans-serif !important;
+  font-weight: 400 !important;
+}
